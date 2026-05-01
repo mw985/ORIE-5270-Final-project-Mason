@@ -13,5 +13,6 @@ The script downloads:
 - `taxi_zone_lookup.csv` (TLC zone -> borough mapping)
 
 Files in this folder are **gitignored** because they are large and easily
-re-downloadable. Generated outputs from `run_taxi_analysis.py` land in
-`data/processed/` and are also gitignored.
+re-downloadable. Generated tabular outputs from `run_taxi_analysis.py` land in
+`data/processed/` and are also gitignored. The small PNG figures are saved in
+`docs/figures/` so they can be included in the GitHub submission.

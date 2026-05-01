@@ -138,7 +138,7 @@ print("MAE:", mae(forecast["pickup_count"], forecast["prediction"]))
 ```
 data/                      # raw inputs (gitignored, fetched by download script)
 docs/
-  figures/                 # generated PNGs (gitignored)
+  figures/                 # generated PNG visualizations
   project_plan.md
 scripts/
   download_data.py         # fetches the TLC parquet + zone CSV
