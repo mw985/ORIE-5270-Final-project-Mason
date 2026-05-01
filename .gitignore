@@ -25,6 +25,7 @@ coverage.xml
 Thumbs.db
 .idea/
 .vscode/
+.ipynb_checkpoints/
 
 # Vendored binaries (do NOT commit; install via pip instead)
 .vendor/
