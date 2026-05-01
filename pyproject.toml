@@ -14,7 +14,7 @@ authors = [
 ]
 dependencies = [
   "pandas>=2.0",
-  "numpy>=1.24",
+  "numpy>=1.24,<2",
   "pyarrow>=14.0",
   "matplotlib>=3.7",
 ]
