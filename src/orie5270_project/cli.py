@@ -13,7 +13,6 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
 
 from .metrics import mae, rmse
 from .taxi import (
@@ -37,17 +36,32 @@ def _project_root() -> Path:
 
 
 def _save_metric_plot(metrics_frame: pd.DataFrame, output_path: Path) -> None:
-    melted = metrics_frame.melt(
-        id_vars=["borough", "model"],
-        value_vars=["mae", "rmse"],
-        var_name="metric",
-        value_name="value",
-    )
-    figure, axis = plt.subplots(figsize=(10, 5))
-    sns.barplot(data=melted, x="borough", y="value", hue="model", ax=axis)
-    axis.set_title("Forecast Error by Borough and Model")
-    axis.set_xlabel("Borough")
-    axis.set_ylabel("Error")
+    figure, axes = plt.subplots(1, 2, figsize=(12, 5), sharex=True)
+    models = list(metrics_frame["model"].drop_duplicates())
+    boroughs = list(metrics_frame["borough"].drop_duplicates())
+    width = 0.8 / max(1, len(models))
+    x_positions = range(len(boroughs))
+
+    for axis, metric in zip(axes, ["mae", "rmse"]):
+        for index, model in enumerate(models):
+            values = []
+            for borough in boroughs:
+                subset = metrics_frame[
+                    (metrics_frame["borough"] == borough)
+                    & (metrics_frame["model"] == model)
+                ]
+                values.append(float(subset[metric].iloc[0]))
+            offsets = [
+                position + (index - (len(models) - 1) / 2) * width
+                for position in x_positions
+            ]
+            axis.bar(offsets, values, width=width, label=model)
+        axis.set_title(metric.upper())
+        axis.set_xlabel("Borough")
+        axis.set_ylabel("Error")
+        axis.set_xticks(list(x_positions), boroughs, rotation=20)
+    axes[0].legend()
+    figure.suptitle("Forecast Error by Borough and Model")
     figure.tight_layout()
     figure.savefig(output_path, dpi=150)
     plt.close(figure)
@@ -89,7 +103,12 @@ def _score(
 
 def run_taxi_analysis() -> None:
     """End-to-end pipeline: read parquet -> hourly demand -> baselines -> outputs."""
-    sns.set_theme(style="whitegrid")
+    plot_style = (
+        "seaborn-v0_8-whitegrid"
+        if "seaborn-v0_8-whitegrid" in plt.style.available
+        else "default"
+    )
+    plt.style.use(plot_style)
 
     root = _project_root()
     data_dir = root / "data"
