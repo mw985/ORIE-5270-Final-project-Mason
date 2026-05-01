@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+build/
+dist/
+
+# Environments
+.venv/
+venv/
+env/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Vendored binaries (do NOT commit; install via pip instead)
+.vendor/
+
+# Data files (should be downloaded via scripts/download_data.py)
+data/raw/
+data/processed/
+data/*.parquet
+data/*.csv
+
+# Generated outputs
+docs/figures/*.png

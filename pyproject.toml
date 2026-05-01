@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "orie5270-final-project"
+version = "0.1.0"
+description = "Reproducible NYC taxi demand forecasting project for ORIE 5270."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "ORIE 5270 Team" }
+]
+dependencies = [
+  "pandas>=2.0",
+  "numpy>=1.24",
+  "pyarrow>=14.0",
+  "matplotlib>=3.7",
+  "seaborn>=0.13",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0",
+  "pytest-cov>=4.0",
+]
+
+[project.scripts]
+orie5270-run-taxi-analysis = "orie5270_project.cli:run_taxi_analysis"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=orie5270_project --cov-report=term-missing --cov-fail-under=80"
+
+[tool.coverage.run]
+source = ["orie5270_project"]
+omit = ["*/__init__.py"]
