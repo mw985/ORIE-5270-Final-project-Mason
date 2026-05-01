@@ -67,7 +67,14 @@ the `pytest` test suite runs without any `PYTHONPATH` tweaks.
 The dependency list pins NumPy to `<2` for compatibility with older
 Anaconda/Jupyter environments whose compiled optional packages may not
 yet support NumPy 2.x. This does not change the analysis; it makes local
-reproduction more reliable.
+reproduction more reliable. These compromises exist in some places and they 
+are necessary steps due to the fact that my only laoptop is an extremely old
+model from about 10 years ago and I only had a very old development environment 
+with very old versions and I somehow couldn't get them to update properly. 
+Therefore, I made them so that I can properly run test for this projects 
+without running into any compatibility issues. The manual test I did for the
+whole project as a whole is the RUN_ME_REPRODUCE.ipynb file which I went through 
+as a final test with all the results I got inside.
 
 ## 4. How to run
 
