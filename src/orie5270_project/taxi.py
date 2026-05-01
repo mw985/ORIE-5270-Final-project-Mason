@@ -113,11 +113,12 @@ def fill_missing_hours(hourly: pd.DataFrame, group_column: str = "Borough") -> p
         )
         expanded = (
             subset.set_index("pickup_hour")
-            .reindex(full_hours, fill_value=0)
+            .reindex(full_hours)
             .rename_axis("pickup_hour")
             .reset_index()
         )
         expanded[group_column] = group_value
+        expanded["pickup_count"] = expanded["pickup_count"].fillna(0).astype(int)
         groups.append(expanded[[group_column, "pickup_hour", "pickup_count"]])
 
     return (
