@@ -64,6 +64,11 @@ python -m pip install -e .[dev]
 After installation, `orie5270_project` is importable from anywhere and
 the `pytest` test suite runs without any `PYTHONPATH` tweaks.
 
+The dependency list pins NumPy to `<2` for compatibility with older
+Anaconda/Jupyter environments whose compiled optional packages may not
+yet support NumPy 2.x. This does not change the analysis; it makes local
+reproduction more reliable.
+
 ## 4. How to run
 
 ### Run the unit tests with coverage
